@@ -7,31 +7,33 @@
 <link rel="stylesheet" href="/src.a2b27638.css"></head>
 
 <body>
-	<div>
+	<div class="input-area">
 		<input placeholder="todoを入力">
 		<button>追加</button>
 	</div>
-	<div>
-		<p>未完了のtodo</p>
+	<div class="incomplete-area">
+		<p class="title">未完了のtodo</p>
 		<ul>
-			<li>
-				<div>
-					<p>Todoです</p>
-					<button>完了</button>
-					<button>削除</button>
+			<div class="list-row">
+				<li>Todoです</li>
+				<button>完了</button>
+				<button>削除</button>
 			</div>
-			</li>
+			<div class="list-row">
+				<li>Todoです</li>
+				<button>完了</button>
+				<button>削除</button>
+			</div>
+			
 		</ul>
 	</div>
-	<div>
-		<p>完了したtodo</p>
+	<div class="complete-area">
+		<p class="title">完了したtodo</p>
 		<ul>
-			<li>
-				<div>
-					<p>Todoです</p>
-					<button>もどす</button>
+			<div class="list-row">
+				<li>Todoです</li>
+				<button>もどす</button>
 			</div>
-			</li>
 		</ul>
 	</div>
 
