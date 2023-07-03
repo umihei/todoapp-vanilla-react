@@ -176,6 +176,74 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
+var onClickAdd = function onClickAdd() {
+  // text boxの値を取得して初期化する
+  var inputText = document.getElementById("add-text").value;
+  document.getElementById("add-text").value = "";
+  createIncompleteList(inputText);
+};
+
+// 未完了リストから指定の要素を削除
+var deleteFromIncompleteList = function deleteFromIncompleteList(target) {
+  document.getElementById("incomplete-list").removeChild(target);
+};
+
+//未完了リストに追加する関数
+var createIncompleteList = function createIncompleteList(text) {
+  // create div tag
+  var div = document.createElement("div");
+  div.className = "list-row";
+
+  // create li tag
+  var li = document.createElement("li");
+  li.innerText = text;
+
+  // button(complete)
+  var completeButton = document.createElement("button");
+  completeButton.innerText = "完了";
+  completeButton.addEventListener("click", function () {
+    // 未完了のTodoを完了したTodoに移し，未完了のTodoから消す
+
+    deleteFromIncompleteList(completeButton.parentNode);
+    var addTarget = completeButton.parentNode;
+    var text = addTarget.firstElementChild.innerText;
+
+    // div以下を初期化
+    addTarget.textContent = null;
+    var li = document.createElement("li");
+    li.innerText = text;
+    var returnButton = document.createElement("button");
+    returnButton.innerText = "もどす";
+    returnButton.addEventListener("click", function () {
+      var returnTarget = returnButton.parentNode;
+      document.getElementById("complete-list").removeChild(returnTarget);
+      var text = returnButton.parentNode.firstElementChild.innerText;
+      createIncompleteList(text);
+    });
+    addTarget.appendChild(li);
+    addTarget.appendChild(returnButton);
+    document.getElementById("complete-list").appendChild(addTarget);
+  });
+
+  // button(delete)
+  var deleteButton = document.createElement("button");
+  deleteButton.innerText = "削除";
+  deleteButton.addEventListener("click", function () {
+    // 押された削除ボタンの親タグ（div）を未完了リストから削除
+    deleteFromIncompleteList(deleteButton.parentNode);
+  });
+
+  // div tag child
+  div.appendChild(li);
+  div.appendChild(completeButton);
+  div.appendChild(deleteButton);
+
+  // append incomplete list
+  document.getElementById("incomplete-list").appendChild(div);
+};
+document.getElementById("add-button").addEventListener("click", function () {
+  return onClickAdd();
+});
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
